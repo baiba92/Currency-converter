@@ -2,27 +2,27 @@
 
 class FuelGauge
 {
-    private int $fuelAmount;
+    private float $liters;
 
-    public function __construct(int $fuelAmount = 0)
+    public function __construct(float $liters = 0)
     {
-        $this->fuelAmount = $fuelAmount;
+        $this->liters = $liters;
     }
 
-    public function getFuelAmount(): int
+    public function getLiters(): float
     {
-        return $this->fuelAmount;
+        return $this->liters;
     }
 
-    public function addFuel()
+    public function increment(int $amount): void
     {
-        $this->fuelAmount++;
+        $this->liters += $amount;
     }
 
-    public function burnFuel()
+    public function decrement(float $amount): void
     {
-        if ($this->fuelAmount > 0) {
-            $this->fuelAmount--;
+        if ($this->liters > 0) {
+            $this->liters -= $amount;
         }
     }
 }

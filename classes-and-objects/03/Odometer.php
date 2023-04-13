@@ -15,7 +15,7 @@ class Odometer
         return $this->mileage;
     }
 
-    public function addMileage()
+    public function increment(): void
     {
         if ($this->mileage <= $this->maximumMileage) {
             $this->mileage++;

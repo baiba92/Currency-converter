@@ -3,78 +3,48 @@
 class VideoStore
 {
     private array $inventory;
-    private bool $isEmpty;
 
-    public function __construct(Video ...$videos)
+    public function __construct(Video ...$video)
     {
-        $this->inventory = $videos;
-        $this->isEmpty = false;
+        $this->inventory = $video;
     }
 
-    public function addVideo(Video $video)
+    public function add(Video $title): void
     {
-        $this->inventory[] = $video;
-        $this->isEmpty = false;
+        $this->inventory[] = $title;
     }
 
-    public function isEmpty(): bool
+    public function rentVideo(Video $video): void
     {
-        return $this->isEmpty;
+        $video->setAvailable(false);
     }
 
-    public function isVideoAvailable(string $title): ?string
+    public function returnVideo(Video $video): void
     {
-        foreach ($this->inventory as $video) {
-            if ($video->getTitle() === $title) {
-                return $video->isAvailable();
-            }
-        }
-        return null;
+        $video->setAvailable(true);
     }
 
-    public function checkIfVideoExists(string $title): bool
+    public function getByIndex(int $index): ?Video
     {
-        foreach ($this->inventory as $video) {
-            if ($video->getTitle() === $title) {
-                return true;
-            }
-        }
-        return false;
+        return $this->inventory[$index] ?: null;
     }
 
-    public function rateVideo(string $title, int $rate)
+    public function getAllVideos(): array
     {
-        foreach ($this->inventory as $video) {
-            if ($video->getTitle() === $title) {
-                $video->rate($rate);
-            }
-        }
+        return $this->inventory;
     }
 
-    public function rentVideo(string $title)
+    public function getTaken(): array
     {
-        foreach ($this->inventory as $video) {
-            if ($video->getTitle() === $title) {
-                $video->rent();
-            }
-        }
+        return array_filter($this->inventory, function ($video) {
+            return $video->isAvailable() == false;
+        });
     }
 
-    public function returnVideo(string $title)
+    public function getAvailable(): array
     {
-        foreach ($this->inventory as $video) {
-            if ($video->getTitle() === $title) {
-                $video->return();
-            }
-        }
-    }
-
-    public function listInventory(): void
-    {
-        foreach ($this->inventory as $video) {
-            echo $video->getTitle();
-            echo ' | rating: ' . $video->getAverageRate();
-            echo ' | ' . $video->isAvailable() . PHP_EOL;
-        }
+        return array_filter($this->inventory, function ($video) {
+            return $video->isAvailable() == true;
+        });
     }
 }

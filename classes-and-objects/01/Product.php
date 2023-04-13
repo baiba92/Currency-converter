@@ -13,9 +13,9 @@ class Product
         $this->amount = $amount;
     }
 
-    public function printProduct(): string
+    public function print(): void
     {
-        return "$this->name, price $this->startPrice EUR, amount $this->amount";
+        echo "$this->name, price $this->startPrice EUR, amount $this->amount";
     }
 
     public function setAmount(int $amount): void

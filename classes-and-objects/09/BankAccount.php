@@ -11,7 +11,7 @@ class BankAccount
         $this->balance = $balance;
     }
 
-    public function show_user_name_and_balance(): string
+    public function showUserNameAndBalance(): string
     {
         $formatted = number_format(abs($this->balance), 2);
         $outputBalance = $this->balance < 0 ? '-$' . $formatted : '$' . $formatted;

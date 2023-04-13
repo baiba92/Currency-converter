@@ -4,38 +4,34 @@ class Video
 {
     private string $title;
     private bool $available = true;
-    private float $rates = 0;
-    private int $timesRated = 0;
+    private array $rates = [];
 
     public function __construct(string $title)
     {
         $this->title = $title;
     }
 
-    public function isAvailable(): string
+    public function isAvailable(): bool
     {
-        return $this->available ? 'available' : 'not available';
+        return $this->available;
     }
 
-    public function rate(int $rate)
+    public function setAvailable(bool $available): void
     {
-        $this->rates += $rate;
-        $this->timesRated++;
+        $this->available = $available;
     }
 
-    public function rent()
+    public function rate(int $rate): void
     {
-        $this->available = false;
+        $this->rates[] = $rate;
     }
 
-    public function return()
+    public function getAverageRate(): float
     {
-        $this->available = true;
-    }
-
-    public function getAverageRate(): string
-    {
-        return $this->timesRated === 0 ? 'not rated' : number_format(($this->rates / $this->timesRated), 1);
+        if (count($this->rates) <= 0) {
+            return 0;
+        }
+        return array_sum($this->rates) / count($this->rates);
     }
 
     public function getTitle(): string

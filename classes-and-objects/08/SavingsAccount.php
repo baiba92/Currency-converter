@@ -14,13 +14,13 @@ class SavingsAccount
         $this->startingBalance = $startingBalance;
     }
 
-    public function setInterestRates(int $annualRate)
+    public function setInterestRates(int $annualRate): void
     {
         $this->annualInterestRate = $annualRate;
         $this->monthlyInterestRate = $annualRate / 12;
     }
 
-    public function withdrawal(int $amount)
+    public function withdrawal(int $amount): void
     {
         $this->startingBalance -= $amount;
         $this->totalWithdrawal += $amount;
@@ -31,7 +31,7 @@ class SavingsAccount
         return $this->totalWithdrawal;
     }
 
-    public function deposit(int $amount)
+    public function deposit(int $amount): void
     {
         $this->startingBalance += $amount;
         $this->totalDeposit += $amount;
@@ -42,7 +42,7 @@ class SavingsAccount
         return $this->totalDeposit;
     }
 
-    public function calculateMonthlyInterest()
+    public function calculateMonthlyInterest(): void
     {
         $monthlyInterest = $this->startingBalance * $this->monthlyInterestRate;
         $this->startingBalance += $monthlyInterest;

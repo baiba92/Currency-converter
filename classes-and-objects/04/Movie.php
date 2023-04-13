@@ -17,7 +17,9 @@ class Movie
     {
         $pgMovies = [];
         foreach ($movies as $movie) {
-            if ($movie->rating === 'PG') {$pgMovies[] = $movie;}
+            if ($movie->rating === 'PG') {
+                $pgMovies[] = $movie;
+            }
         }
         return $pgMovies;
     }

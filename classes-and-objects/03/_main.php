@@ -5,10 +5,11 @@ include 'FuelGauge.php';
 include 'Odometer.php';
 
 $car = new Car(new FuelGauge(), new Odometer(999980));
-$car->fillTank(20);
+$car->addFuel(70);
 
-while ($car->getFuelGauge()->getFuelAmount() > 0) {
+while ($car->fuelAmount() > 0) {
     $car->drive();
-    echo 'Mileage: ' . $car->getOdometer()->getMileage() . PHP_EOL;
-    echo 'Fuel amount: ' . $car->getFuelGauge()->getFuelAmount() . PHP_EOL;
+    sleep(1);
+    echo 'Mileage: ' . $car->currentMileage() . PHP_EOL;
+    echo 'Fuel amount: ' . $car->fuelAmount() . PHP_EOL;
 }

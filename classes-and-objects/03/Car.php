@@ -5,8 +5,7 @@ class Car
     private FuelGauge $fuelGauge;
     private Odometer $odometer;
     private int $fuelTankSize = 70;
-    private int $fuelEconomy = 10;
-    private int $distanceTraveled = 0;
+    private const LITERS_PER_HUNDRED = 10;
 
     public function __construct(FuelGauge $fuelGauge, Odometer $odometer)
     {
@@ -14,35 +13,33 @@ class Car
         $this->odometer = $odometer;
     }
 
-    public function fillTank(int $amount)
+    public function addFuel(int $amount): void
     {
-        while ($this->fuelGauge->getFuelAmount() < $this->fuelTankSize
-            && $this->fuelGauge->getFuelAmount() <= $amount) {
-            $this->fuelGauge->addFuel();
+        if (($this->fuelAmount() + $amount) <= $this->fuelTankSize) {
+            $this->fuelGauge->increment($amount);
+            return;
         }
+        echo 'Fuel tank capacity is 70 liters.';
     }
 
-    public function burnFuelByDistanceTraveled()
+    public function burnFuel(): void
     {
-        if ($this->distanceTraveled % $this->fuelEconomy === 0) {
-            $this->fuelGauge->burnFuel();
-        }
+        $this->fuelGauge->decrement(self::LITERS_PER_HUNDRED / 100);
     }
 
-    public function drive()
+    public function drive(): void
     {
-        $this->odometer->addMileage();
-        $this->burnFuelByDistanceTraveled();
-        $this->distanceTraveled++;
+        $this->odometer->increment();
+        $this->burnFuel();
     }
 
-    public function getFuelGauge(): FuelGauge
+    public function fuelAmount(): float
     {
-        return $this->fuelGauge;
+        return $this->fuelGauge->getLiters();
     }
 
-    public function getOdometer(): Odometer
+    public function currentMileage(): int
     {
-        return $this->odometer;
+        return $this->odometer->getMileage();
     }
 }

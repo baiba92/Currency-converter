@@ -11,7 +11,7 @@ class Point
         $this->y = $y;
     }
 
-    public function swapPoints(Point &$a, Point &$b)
+    public function swapPoints(Point &$a, Point &$b): void
     {
         $c = $a;
         $a = $b;
