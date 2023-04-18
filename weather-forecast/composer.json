@@ -1,0 +1,12 @@
+{
+    "name": "baiba/weather-forecast",
+    "autoload": {
+        "psr-4": {
+            "WeatherForecast\\": "app/"
+        }
+    },
+    "require": {
+        "guzzlehttp/guzzle": "^7.5",
+        "vlucas/phpdotenv": "^5.5"
+    }
+}
