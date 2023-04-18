@@ -17,10 +17,10 @@ class ApiClient
     {
         $url = "https://data.gov.lv/dati/lv/api/3/action/datastore_search?q=$parameter&resource_id=25e80bf3-f107-4ab4-89ef-251b5b9374e9";
         $response = $this->client->get($url);
-        $businessData = json_decode($response->getBody()->getContents());
+        $companyData = json_decode($response->getBody()->getContents());
 
         $foundedRecords = [];
-        foreach ($businessData->result->records as $record) {
+        foreach ($companyData->result->records as $record) {
             if ($record->regcode == $parameter || strpos(strtolower($record->name), strtolower($parameter)))
                 $foundedRecords[] = new BusinessData(
                     $record->name,
