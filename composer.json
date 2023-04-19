@@ -1,0 +1,13 @@
+{
+    "name": "baiba/test",
+    "autoload": {
+        "psr-4": {
+            "App\\": "app/"
+        }
+    },
+    "require": {
+        "guzzlehttp/guzzle": "^7.5",
+        "ext-readline": "*",
+        "ext-simplexml": "*"
+    }
+}
