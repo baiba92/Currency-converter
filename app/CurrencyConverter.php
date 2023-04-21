@@ -11,11 +11,11 @@ class CurrencyConverter
         $this->apiClient = new ApiClient();
     }
 
-    public function convertCurrency(float $amount, string $currency): float
+    public function convertCurrency(float $amount, string $currency): ?float
     {
         $records = $this->apiClient->getRates();
 
-        $result = 0;
+        $result = null;
         foreach ($records->Currencies->Currency as $record) {
             if ($record->ID == $currency) {
                 $result = $amount * $record->Rate;

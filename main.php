@@ -9,4 +9,10 @@ $currency = readline('Enter currency to convert: ');
 
 $converter = new CurrencyConverter();
 
-echo "EUR $amount -> $currency {$converter->convertCurrency($amount, $currency)}";
+if (!$converter->convertCurrency($amount, $currency)) {
+    echo "Currency not found" . PHP_EOL;
+    exit;
+}
+
+$formattedAmount = number_format($converter->convertCurrency($amount, $currency), 2);
+echo "EUR $amount -> $currency $formattedAmount";
